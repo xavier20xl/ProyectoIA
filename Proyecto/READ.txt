@@ -1,0 +1,17 @@
+El código proporcionado es un sistema básico de inicio de sesión y registro que utiliza reconocimiento facial junto con un método tradicional de usuario y contraseña. Está implementado en Python utilizando las bibliotecas Tkinter para la interfaz gráfica, OpenCV para el procesamiento de imágenes y la detección facial, y MTCNN (Multi-task Cascaded Convolutional Networks) para la detección de rostros. El programa consta de dos partes principales: el registro y el inicio de sesión. - En la parte de registro, el usuario tiene la opción de registrarse de manera tradicional ingresando un nombre de usuario y una contraseña, o mediante registro facial capturando una imagen de su rostro a través de la cámara web. -
+
+se está utilizando TensorFlow indirectamente a través de la biblioteca MTCNN (redes convolucionales en cascada multitarea). MTCNN es un modelo de detección de rostros que utiliza TensorFlow como backend para cálculos de redes neuronales. Específicamente, MTCNN se emplea en su código para detectar rostros en imágenes capturadas desde la cámara web durante los procesos de registro e inicio de sesión. TensorFlow se ejecuta en segundo plano como motor del modelo MTCNN para realizar tareas de detección de rostros.
+
+Aquí hay una descripción básica de cómo funciona la biblioteca:
+
+Pirámide de imágenes: La biblioteca MTCNN comienza generando una pirámide de imágenes a diferentes escalas. Esto se hace para detectar rostros de diferentes tamaños en la imagen original.
+Detección de rostros: En la primera etapa, se aplica una red neuronal convolucional para escanear la imagen y detectar posibles regiones faciales. Esta etapa produce candidatos para rostros potenciales junto con sus puntuaciones de confianza.
+Refinamiento de la detección: En la siguiente etapa, los candidatos detectados en la primera etapa se refinan utilizando otra red neuronal convolucional para mejorar la precisión de la detección y reducir los falsos positivos.
+Supresión de no máximos: Después del refinamiento, se aplica un algoritmo de supresión de no máximos para eliminar las detecciones redundantes y conservar solo las detecciones más relevantes y precisas.
+Localización de puntos clave faciales: Una vez que se han detectado los rostros, se utilizan redes neuronales adicionales para localizar los puntos clave faciales, como los ojos, la nariz y la boca, en cada rostro detectado.
+
+Estos puntos clave suelen incluir:
+
+Coordenadas de los ojos (izquierdo y derecho).
+Coordenadas de la nariz (punta de la nariz).
+Coordenadas de la boca (centro de la boca, comisuras de los labios).
